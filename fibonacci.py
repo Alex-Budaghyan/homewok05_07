@@ -1,9 +1,22 @@
-def fibonacci(n):
+def fibonacci(n, fib_cache = {}):
+    if type(n) is not int:
+        raise ValueError("n must be integer")
+
+    if n in fib_cache:
+        return fib_cache[n]
+
     if n == 0:
-        return 0
-    if n == 1:
+        result = 0
+    elif n == 1:
         return 1
-    return fibonacci(n - 1) + fibonacci(n - 2)
+    else:
+        result = fibonacci(n - 2) + fibonacci(n - 1)
+
+    fib_cache[n] = result
+    return result
 
 
-print(fibonacci(11))
+try:
+    print(fibonacci(11))
+except ValueError as ve:
+    print(str(ve))
