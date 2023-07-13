@@ -1,15 +1,26 @@
-def bubble_sort(arr: list) -> list:
-    n = len(arr)
-    for i in range(n - 1):
-        swapped = False
-        for j in range(n - i - 1):
-            if arr[j] > arr[j + 1]:
-                swapped = True
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-        if not swapped:
+def bubble_sort(array: list) -> list:
+    try:
+        array = list(array)
+    except TypeError:
+        raise TypeError("Array is not a list and can't be casted to list")
+
+    is_sorted = False
+    for i in range(len(array)):
+        if is_sorted:
             break
-    return arr
+        try:
+            for j in range(len(array) - i - 1):
+                if array[j] > array[j + 1]:
+                    array[j], array[j + 1] = array[j + 1], array[j]
+                    is_sorted = False
+        except TypeError:
+            raise TypeError("The types are incomparable")
 
+    return array
 
-arr1 = [1, 8, 4, 5, 9, 6, 3, 7, 2]
-print(bubble_sort(arr1))
+ls1 = [1, 5, 7, 9, 3, 4, 2, 8]
+
+try:
+    print(bubble_sort(ls1))
+except TypeError as te:
+    print(str(te))
