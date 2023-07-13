@@ -1,14 +1,20 @@
-def factorial(num ,fact_cache = {}):
-    if num == 0 or num == 1:
-        return 1
+def factorial(num, fact_cache = {}):
+    if type(num) is not int:
+        raise ValueError("Number must be integer")
+
     if num in fact_cache:
         return fact_cache[num]
-    if num < 0:
+    if num == 0 or num == 1:
+        result = 1
+    elif num < 0:
         raise ValueError("The number can't be negative")
-    res = factorial(num - 1) * num
-    fact_cache[num] = res
-    return res
+    else:
+        result = factorial(num - 1) * num
+    fact_cache[num] = result
+    return result
 
 
-print(factorial(5))
-print(factorial(14))
+try:
+    print(factorial(15))
+except ValueError as ve:
+    print(str(ve))
